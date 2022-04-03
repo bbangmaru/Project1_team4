@@ -1,7 +1,9 @@
 import csv
+import os
 import numpy as np
 import pandas as pd
 
+import CompleteRandomSearch
 from CalculationDist import Calculation # 계산 담당
 from ClusteringCity import Clustering # 클러스터링 담당
 from MakeCrossover import Crossover # 교차연산 담당
@@ -18,6 +20,7 @@ with open('TSP.csv', mode='r', newline='') as tsp:
         cities.append(row)
 
 sol = []
+
 #1. get solution sequence and reordering (sort from 0)
 with open('example_solution.csv', mode='r', newline='') as solution:
     # read solution sequence
@@ -34,6 +37,27 @@ with open('example_solution.csv', mode='r', newline='') as solution:
     sol = front + back # 두개를 합침
     # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
     sol.append(int(0))
+
+
+os.system('cls')
+print('================================')
+print('=        Genetic TSP           =')
+print('=                              =')
+print('=  Option Value                =')
+print('=    1 : CompleteRandomSearch  =')
+print('=    2 : GeneticTSP            =')
+print('=    3 : GeneticTSP + tree     =')
+print('=                              =')
+print('================================')
+print('Input option : ')
+
+option = input()
+if option == '1':
+    print('wait for 10secs...')
+    print('final total : ' + str(CompleteRandomSearch.CRS.cost(sol, cities)))
+
+
+'''
 # kcluster instance 생성
 kcluster = Clustering()
 k = 10
@@ -42,6 +66,7 @@ picked = [0 for _ in range(k)]
 tree_search_cost, tree_search_path = TreeSearch.DFS(picked, center_city_coord, k, 0)
 print(tree_search_cost)
 print(tree_search_path)
+'''
 
 
 
