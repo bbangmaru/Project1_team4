@@ -16,6 +16,24 @@ with open('TSP.csv', mode='r', newline='') as tsp:
     reader = csv.reader(tsp)
     for row in reader :
         cities.append(row)
+
+sol = []
+#1. get solution sequence and reordering (sort from 0)
+with open('example_solution.csv', mode='r', newline='') as solution:
+    # read solution sequence
+    reader = csv.reader(solution)
+    for row in reader:
+        sol.append(int(row[0]))
+    # reordering solution sequence, 해답 sequence를 재배치
+    idx = sol.index(0) # 189
+
+    front = sol[idx:] # 189 ~ 1000
+
+    back = sol[0:idx] # 0 ~ 189
+
+    sol = front + back # 두개를 합침
+    # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
+    sol.append(int(0))
 # kcluster instance 생성
 kcluster = Clustering()
 k = 10

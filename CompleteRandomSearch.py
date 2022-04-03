@@ -3,7 +3,6 @@ import csv
 import random
 import time
 
-
 # given cities
 cities = []
 # solution
