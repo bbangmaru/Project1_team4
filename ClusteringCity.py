@@ -1,17 +1,15 @@
-import numpy as np
-import pandas as pd
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
+import numpy as np
 # head_cluster_city: 중심점의 좌표값 저장
 # child_city_idxs: 중심점과 연관되어 있는 도시들의 index 정보
 # child_cluster_city: 중심점과 연관되어 있는 도시들의 좌표값 저장
 class Clustering:
 
     @staticmethod
-    def clusterTSP(m, df, k):# k는 군집의 수를 의미
-        sub = KMeans(n_clusters=k) # k개의 집단으로 분할
+    def clusterTSP(df, k, cities):# k는 군집의 수를 의미
+        sub = KMeans(n_clusters = k) # k개의 집단으로 분할
         sub.fit(df) # fit 시키기 - clustering 진행
-        labels = sub.predict(df) # df가 속해있는 각각의 sample의 가장 가까운 cluster 예측 -> 각각의 sample이 속해있는 index를 반환
         df["cluster"] = sub.labels_ # data frame에 cluster열 추가, 0~k-1까지의 인덱스 형태를 지님
         center = sub.cluster_centers_ # 10개의 center -> sub 생성시 생성, 2차원 ndarray 형태, 중심점은 평균값
         # 중심점과, 자식 도시들을 head와 child에 추가
@@ -25,7 +23,7 @@ class Clustering:
                 head.append(x)
             child_idx.append(head) # 리스트 통째로 넣기
             for j in range(len(head)):
-                child.append(m.cities[head[j]])
+                child.append(cities[head[j]])
             child_city.append(child)
     
         '''

@@ -7,7 +7,7 @@ class Calculation:
         dist = np.linalg.norm(np.array(x)-np.array(y))
         return dist
 
-    # 3. evaluate solution cost - 해집합의 최종 cost를 계산
+    # 2. evaluate solution cost - 해집합의 최종 cost를 계산
     @staticmethod
     def evalTotalcost(s, c):
         total_cost = 0
