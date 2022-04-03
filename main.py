@@ -1,12 +1,15 @@
 import csv
+import numpy as np
+from CalculationDist import Calculation # 계산 담당
+from ClusteringCity import Clustering # 클러스터링 담당
+from MakeCrossover import Crossover # 교차연산 담당
+from MakeMutation import Mutation # 변이 담당
+from Selection import Select # 선택 담당 - fitness 함수를 정의하면 됨
+from Tree import TreeSearch # 트리 search 담당
 
 cities = []
 sol = []
 order = []
-# Euclidean distance measuring function
-def distance(x, y):
-    dist = np.linalg.norm(np.array(x)-np.array(y))
-    return dist
 
 #1. get solution sequence and reordering (sort from 0)
 with open('example_solution.csv', mode='r', newline='') as solution:
@@ -30,18 +33,6 @@ with open('TSP.csv', mode='r', newline='') as tsp:
     reader = csv.reader(tsp)
     for row in reader:
         cities.append(row)
-# 3. evaluate solution cost
-def evalcost(s, c):
-    total_cost = 0
-    for idx in range(len(s)-1):
-        # get city positions
-        pos_city_1 = [float(c[s[idx]][0]), float(c[s[idx]][1])]
-        pos_city_2 = [float(c[s[idx+1]][0]), float(c[s[idx+1]][1])]
-        # distance calculation
-        dist = distance(pos_city_1, pos_city_2)
-        #print(dist)
-        # accumulation
-        total_cost += dist
-    return total_cost
+
 
 # 여기까진 첨부 자료

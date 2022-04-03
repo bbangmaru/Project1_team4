@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 class Clustering:
 
     @staticmethod
-    def clusterTSP(df, k):# k는 군집의 수를 의미
+    def clusterTSP(m, df, k):# k는 군집의 수를 의미
         sub = KMeans(n_clusters=k) # k개의 집단으로 분할
         sub.fit(df) # fit 시키기 - clustering 진행
         labels = sub.predict(df) # df가 속해있는 각각의 sample의 가장 가까운 cluster 예측 -> 각각의 sample이 속해있는 index를 반환
@@ -25,7 +25,7 @@ class Clustering:
                 head.append(x)
             child_idx.append(head) # 리스트 통째로 넣기
             for j in range(len(head)):
-                child.append(cities[head[j]])
+                child.append(m.cities[head[j]])
             child_city.append(child)
     
         '''
