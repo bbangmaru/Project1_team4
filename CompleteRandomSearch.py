@@ -1,9 +1,10 @@
 import numpy as np
 import csv
 import random
+import time
+
 
 # given cities
-sample = [1,2,3,4,5]
 cities = []
 # solution
 sol = []
@@ -31,13 +32,21 @@ with open('TSP.csv', mode='r', newline='') as tsp:
     for row in reader:
         cities.append(row)
 
-random.shuffle(cities)
+# 3. CompleteRandomSearch
+# shuffle solution but first
+def randsol(s):
+    s.reverse()
+    first = s.pop()
+    random.shuffle(s)
+    s.append(first)
+    s.reverse()
+    return s
 
 
 class Calculation:
     # Euclidean distance measuring function
     @staticmethod
-    def calculate_dist(x, y) :
+    def calculate_dist(x, y):
         dist = np.linalg.norm(np.array(x)-np.array(y))
         return dist
 
@@ -55,5 +64,13 @@ class Calculation:
             total_cost += dist
         return total_cost
 
+# shuffle solution and generate RandomSearch by 10secs
+minTot = 99999
+now = time.time()
+while now + 10 > time.time():
+    curTot = Calculation.evalTotalcost(randsol(sol), cities)
+    if curTot < minTot:
+        minTot = curTot
 
-print(Calculation.evalTotalcost(sol, cities))
+# best case of CompleteRandomSearch
+print("final cost : " + str(minTot))
