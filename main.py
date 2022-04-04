@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-import CompleteRandomSearch
+from CompleteRandomSearch import CRS
 from CalculationDist import Calculation # 계산 담당
 from ClusteringCity import Clustering # 클러스터링 담당
 from MakeCrossover import Crossover # 교차연산 담당
@@ -14,7 +14,7 @@ from Tree import TreeSearch # 트리 search 담당
 df = pd.read_csv("TSP.csv", header=None, names=['x', 'y'])
 #print(df)
 cities = []
-with open('TSP.csv', mode='r', newline='') as tsp:
+with open("TSP.csv", mode='r', newline='') as tsp:
     reader = csv.reader(tsp)
     for row in reader :
         cities.append(row)
@@ -22,7 +22,7 @@ with open('TSP.csv', mode='r', newline='') as tsp:
 sol = []
 
 #1. get solution sequence and reordering (sort from 0)
-with open('example_solution.csv', mode='r', newline='') as solution:
+with open("example_solution.csv", mode='r', newline='') as solution:
     # read solution sequence
     reader = csv.reader(solution)
     for row in reader:
@@ -39,25 +39,37 @@ with open('example_solution.csv', mode='r', newline='') as solution:
     sol.append(int(0))
 
 
-os.system('cls')
-print('================================')
-print('=        Genetic TSP           =')
-print('=                              =')
-print('=  Option Value                =')
-print('=    1 : CompleteRandomSearch  =')
-print('=    2 : GeneticTSP            =')
-print('=    3 : GeneticTSP + tree     =')
-print('=                              =')
-print('================================')
-print('Input option : ')
+os.system("cls")
+print("================================")
+print("=        Genetic TSP           =")
+print("=                              =")
+print("=  Option Value                =")
+print("=    1 : CompleteRandomSearch  =")
+print("=    2 : GeneticTSP            =")
+print("=    3 : GeneticTSP + tree     =")
+print("=                              =")
+print("================================")
+print("Input option : ")
 
-option = input()
-if option == '1':
-    print('wait for 10secs...')
-    print('final total : ' + str(CompleteRandomSearch.CRS.cost(sol, cities)))
+option = int(input())
+if option == 1:
+    print("wait for 10secs...")
+    print("final total : " + str(CRS.cost(sol, cities)))
+elif option == 2:
+    print("option 2")
 
+elif option == 3:
+    print("Clustering...")
+    kcluster = Clustering()
+    k = 10
+    center_city_coord, child_city_idx, child_city_coord = kcluster.clusterTSP(df, k, cities)
+    print("Tree Searching...")
+    picked = [0 for _ in range(k)]
+    tree_search_cost, tree_search_path = TreeSearch.DFS(picked, center_city_coord, k, 0)
+    print(tree_search_cost)
+    print(tree_search_path)
 
-'''
+"""
 # kcluster instance 생성
 kcluster = Clustering()
 k = 10
@@ -66,7 +78,7 @@ picked = [0 for _ in range(k)]
 tree_search_cost, tree_search_path = TreeSearch.DFS(picked, center_city_coord, k, 0)
 print(tree_search_cost)
 print(tree_search_path)
-'''
+"""
 
 
 
