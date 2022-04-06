@@ -21,7 +21,7 @@ class CRS:
         mintot = 99999
         now = time.time()
         while now + 10 > time.time():
-            curtot = cd.Calculation.evalTotalcost(CRS.shuffle(s), c)
+            curtot = cd.Calculation.evalTotalcost(s, c)
             if curtot < mintot:
                 mintot = curtot
         # best case of CompleteRandomSearch

@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-from CompleteRandomSearch import CRS
+from CompleteRandomSearch import CRS # 완전 무작위 탐색
 from CalculationDist import Calculation # 계산 담당
 from ClusteringCity import Clustering # 클러스터링 담당
 from MakeCrossover import Crossover # 교차연산 담당
@@ -54,9 +54,14 @@ print("Input option : ")
 option = int(input())
 if option == 1:
     print("wait for 10secs...")
+    sol = CRS.shuffle(sol)
     print("final total : " + str(CRS.cost(sol, cities)))
+    print(sol)
+
+
 elif option == 2:
     print("option 2")
+
 
 elif option == 3:
     print("Clustering...")
