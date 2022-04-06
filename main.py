@@ -56,7 +56,7 @@ if option == 1:
     print("wait for 10secs...")
     sol = CRS.shuffle(sol)
     print("final total : " + str(CRS.cost(sol, cities)))
-    print(sol)
+    #print(sol)
 
 
 elif option == 2:
