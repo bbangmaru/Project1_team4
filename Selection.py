@@ -1,3 +1,4 @@
+import random
 from CalculationDist import Calculation
 
 class Select:
@@ -8,6 +9,13 @@ class Select:
         return
     # roulette-wheel 선택
     @staticmethod
-    def roulette_wheel():
-
-        return
+    def roulette_wheel(fitness):
+        fitnessSum = 0
+        for i in range(len(fitness)):
+            fitnessSum += fitness[i]
+        point = random.random() * fitnessSum
+        s = 0
+        for i in range(len(fitness)):
+            s += fitness[i]
+            if point < s :
+                return i
