@@ -4,15 +4,23 @@ import random
 from CalculationDist import Calculation
 from MakeMutation import Mutation
 from MakeCrossover import Crossover
+from Selection import Select
 
 class geneTSP:
     cities = []
     cities_idx = []
+    # 해집단 10개
     cities_idx1 = []
     cities_idx2 = []
     cities_idx3 = []
     cities_idx4 = []
     cities_idx5 = []
+    cities_idx6 = []
+    cities_idx7 = []
+    cities_idx8 = []
+    cities_idx9 = []
+    cities_idx10 = []
+    fitness = []
     def __init__(self):
         with open("TSP.csv", mode='r', newline='') as tsp:
             reader = csv.reader(tsp)
@@ -24,14 +32,48 @@ class geneTSP:
         random.shuffle(self.cities_idx1)
         self.cities_idx2 = self.cities_idx.copy()
         random.shuffle(self.cities_idx2)
+        self.cities_idx3 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx3)
+        self.cities_idx4 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx4)
+        self.cities_idx5 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx5)
+        self.cities_idx6 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx6)
+        self.cities_idx7 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx7)
+        self.cities_idx8 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx8)
+        self.cities_idx9 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx9)
+        self.cities_idx10 = self.cities_idx.copy()
+        random.shuffle(self.cities_idx10)
+
+        # 초기 fitness 설정
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx1))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx2))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx3))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx4))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx5))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx6))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx7))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx8))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx9))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx10))
+            
     
         
     # 실제로 실행 담당하는 함수
     def execute(self):
-        print(self.cities_idx1)
         print("=============================================")
-        print(self.cities_idx2)
-        print("교차 연산을 실행합니다.")
-        p = Crossover.order_cross(self.cities_idx1, self.cities_idx2)
-        print(p)
+        print("Calculate Fitness...")
+        print("Selection Start...")
+        for i in range(len(self.fitness)):
+            print(i +":"+ self.fitness[i])
+        index = Select.roulette_wheel(self.fitness)
+        print("index: ", index)
+        print("Crossover Start...")
+        new_cities_idx1 = Crossover.order_cross(self.cities_idx1, self.cities_idx2)
+        Calculation.calculate_fitness(self.cities, new_cities_idx1, self.cities_idx2)
+        print("Mutation Start...")
         
