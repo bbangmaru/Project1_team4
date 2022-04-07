@@ -76,6 +76,23 @@ elif option == 3:
     print(tree_search_cost)
     print(tree_search_path)
 
+
+
+'''
+elif option == 0:
+    idx = list(range(0, 200))
+    c = cities[:200]
+    #print(Calculation.idxarray(idx, c))
+    idxArr = Calculation.idxarray(idx, c)
+    #print(Calculation.distantarray(idxArr))
+    f = open("sampleDistantArray.csv", 'w', newline='')
+    wr = csv.writer(f)
+    for row in range(len(idxArr) - 1):
+        wr.writerow(Calculation.distantarray(idxArr)[row])
+    f.close()
+'''
+
+
 """
 # kcluster instance 생성
 kcluster = Clustering()
