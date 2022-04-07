@@ -1,12 +1,14 @@
 import random
 from CalculationDist import Calculation
 
+
 class Select:
     #랜덤으로 선택해주는 함수
     @staticmethod
     def randomSelect():
         
         return
+
     # roulette-wheel 선택
     @staticmethod
     def roulette_wheel(fitness):
@@ -17,5 +19,6 @@ class Select:
         s = 0
         for i in range(len(fitness)):
             s += fitness[i]
-            if point < s :
+            if point < s:
                 return i
+
