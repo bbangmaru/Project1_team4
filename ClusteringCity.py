@@ -28,13 +28,12 @@ class Clustering:
     
         '''
         #cluster를 보여주는 코드
-        # 산점도 그려보기
-        if 'p' in key: # 처음 1000개의 도시에 대한 부모집단 나누기
+        # 산점도 그려보기 - 부모
             plt.scatter(df.x, df.y, c=labels, s=10, alpha=0.5) # c 값으로 각각의 sample이 속해있는 cluster index 별로 색상 나누기, labels에는 인덱스 저장되어 있음
             plt.scatter(center[:, 0], center[:, 1], color="RED", s=100, marker='*') # 별은 중심점을 의미
             plt.title("CITY CLUSTER")
             plt.show()
-        elif 'c' in key:
+        # 산점도 그려보기 - 자식
             plt.scatter(df.x, df.y, c="BLACK", s=10, alpha=0.5) # c 값으로 각각의 sample이 속해있는 cluster index 별로 색상 나누기, labels에는 인덱스 저장되어 있음
             plt.scatter(center[:, 0], center[:, 1], color="RED", s=100, marker='*') # 별은 중심점을 의미
             plt.title("CHILD")

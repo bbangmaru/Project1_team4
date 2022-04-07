@@ -7,7 +7,7 @@ class Calculation:
         dist = np.linalg.norm(np.array(x)-np.array(y))
         return dist
 
-    # 2. evaluate solution cost - 해집합의 최종 cost를 계산
+    # evaluate solution cost - 해집합의 최종 cost를 계산
     @staticmethod
     def evalTotalcost(s, c):
         total_cost = 0
@@ -20,3 +20,16 @@ class Calculation:
             # accumulation
             total_cost += dist
         return total_cost
+
+    # fitness calculation - 적합도 계산
+    @staticmethod
+    def calculate_fitness(original_cities_idx, original_cities, new_cities_idx, new_cities): #원래 city index, 좌표 & 바뀐 city index, 좌표
+        original_dist = Calculation.evalTotalcost(original_cities_idx, original_cities)
+        new_dist = Calculation.evalTotalcost(new_cities_idx, new_cities)
+        fit = original_dist / new_dist
+        return fit
+
+
+
+
+

@@ -10,6 +10,7 @@ from MakeCrossover import Crossover # 교차연산 담당
 from MakeMutation import Mutation # 변이 담당
 from Selection import Select # 선택 담당 - fitness 함수를 정의하면 됨
 from Tree import TreeSearch # 트리 search 담당
+import geneticTSP
 
 df = pd.read_csv("TSP.csv", header=None, names=['x', 'y'])
 #print(df)
@@ -61,7 +62,8 @@ if option == 1:
 
 elif option == 2:
     print("option 2")
-
+    gtsp = geneticTSP.geneTSP()
+    gtsp.execute()
 
 elif option == 3:
     print("Clustering...")
