@@ -1,6 +1,7 @@
 from email import header
 import random
 
+
 class Crossover:
     @staticmethod
     def order_cross(origin_idx1, origin_idx2):
