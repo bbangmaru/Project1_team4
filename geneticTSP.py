@@ -79,7 +79,7 @@ class geneTSP():
 
         # 마지막 세대 output
         print(self.elite_cities_idx[evolarr.index(min(evolarr))])       # 마지막 세대 solution
-        print(evolarr.index(min(evolarr)))                              # 마지막 세대 dist
+        #print(min(evolarr))                                             # 마지막 세대 dist
 
         return min(evolarr)
 

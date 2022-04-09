@@ -61,8 +61,8 @@ if option == 1:
 
 elif option == 2:
     gTSP = geneticTSP.geneTSP(30, 50)
-    print(gTSP.evolution())
-
+    result = gTSP.evolution()
+    print(result)
     ''' 함수로 만들거 >>
     idx = sol.index(0)  # ?
     front = sol[idx:]  # ? ~ 1000
