@@ -35,28 +35,28 @@ class geneTSP:
                 self.cities.append(row)
         for i in range(0, 1000):
             self.cities_idx_.append(i)
-            self.cities_idx[0] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[0])
-            self.cities_idx[1] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[1])
-            self.cities_idx[2] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[2])
-            self.cities_idx[3] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[3])
-            self.cities_idx[4] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[4])
-            self.cities_idx[5] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[5])
-            self.cities_idx[6] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[6])
-            self.cities_idx[7] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[7])
-            self.cities_idx[8] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[8])
-            self.cities_idx[9] = self.cities_idx_.copy()
-            random.shuffle(self.cities_idx[9])
+        self.cities_idx[0] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[0])
+        self.cities_idx[1] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[1])
+        self.cities_idx[2] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[2])
+        self.cities_idx[3] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[3])
+        self.cities_idx[4] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[4])
+        self.cities_idx[5] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[5])
+        self.cities_idx[6] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[6])
+        self.cities_idx[7] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[7])
+        self.cities_idx[8] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[8])
+        self.cities_idx[9] = self.cities_idx_.copy()
+        random.shuffle(self.cities_idx[9])
 
-            '''
+        '''
             self.cities_idx1 = self.cities_idx.copy()
             random.shuffle(self.cities_idx1)
             self.cities_idx2 = self.cities_idx.copy()
@@ -79,27 +79,27 @@ class geneTSP:
             random.shuffle(self.cities_idx10)
             '''
 
-            # 초기 fitness 설정
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[0]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[1]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[2]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[3]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[4]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[5]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[6]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[7]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[8]))
-            self.fitness.append(
-                Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[9]))
+        # 초기 fitness 설정
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[0]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[1]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[2]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[3]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[4]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[5]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[6]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[7]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[8]))
+        self.fitness.append(
+            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[9]))
 
     # 실제로 실행 담당하는 함수
     def execute(self):
