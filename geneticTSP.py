@@ -21,6 +21,8 @@ class geneTSP:
     cities_idx9 = []
     cities_idx10 = []
     fitness = []
+    elite_cities_idx = [] # 유전 과정을 한번 거친 해집합에 대한 도시 정보
+    elite_fitness = [] # 유전 과정을 한번 거친 해집합에 대한 fitness
     def __init__(self):
         with open("TSP.csv", mode='r', newline='') as tsp:
             reader = csv.reader(tsp)
