@@ -59,7 +59,6 @@ if option == 1:
     print("final total : " + str(CRS.cost(sol, cities)))
     #print(sol)
 
-
 elif option == 2:
     print("option 2")
     gtsp = geneticTSP.geneTSP()
@@ -75,8 +74,6 @@ elif option == 3:
     tree_search_cost, tree_search_path = TreeSearch.DFS(picked, center_city_coord, k, 0)
     print(tree_search_cost)
     print(tree_search_path)
-
-
 
 '''
 elif option == 0:

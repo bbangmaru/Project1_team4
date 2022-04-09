@@ -19,7 +19,7 @@ class Select:
         print("fitnessSum   : ", fitnessSum)
 
         point1 = random.uniform(0, fitnessSum)
-        while point1 != fitnessSum:
+        while point1 == fitnessSum:
             point1 = random.uniform(0, fitnessSum)
 
         while point1 > 0:
