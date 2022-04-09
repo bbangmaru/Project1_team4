@@ -8,6 +8,7 @@ from Selection import Select
 
 
 class geneTSP:
+    generation = 1
     cities = []
     cities_idx_ = []
     # 해집단 10개
@@ -25,8 +26,8 @@ class geneTSP:
         cities_idx10 = []
     '''
     fitness = []
-    elite_cities_idx = []  # 유전 과정을 한번 거친 해집합에 대한 도시 정보
-    elite_fitness = []  # 유전 과정을 한번 거친 해집합에 대한 fitness
+    elite_cities_idx = [0 for i in range(10)] # 유전 과정을 한번 거친 해집합에 대한 도시 정보
+    elite_fitness = [0 for i in range(10)]  # 유전 과정을 한번 거친 해집합에 대한 fitness
 
     def __init__(self):
         with open("TSP.csv", mode='r', newline='') as tsp:
@@ -100,6 +101,7 @@ class geneTSP:
             Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[8]))
         self.fitness.append(
             Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[9]))
+        
 
     # 실제로 실행 담당하는 함수
     def execute(self):
@@ -114,8 +116,19 @@ class geneTSP:
             roulette_fit.append(Calculation.roulette_fitness(self.fitness, i, 3))
         print(roulette_fit)
         index = Select.roulette_wheel(roulette_fit)
-        print("index: ", index)
+        self.elite_fitness[0] = self.fitness[index[0]]
+        best_fitness = self.elite_fitness[0]
         print("Crossover Start...")
-        new_cities_idx1 = Crossover.order_cross(self.cities_idx[index[0]], self.cities_idx[index[1]])
-        Calculation.calculate_fitness(self.cities, self.cities_idx[index[0]], self.cities, self.cities_idx[index[1]])
+        new_cities_idx = Crossover.order_cross(self.cities_idx[index[0]], self.cities_idx[index[1]])
         print("Mutation Start...")
+        self.elite_cities_idx[self.generation] = Mutation.randomMutate(new_cities_idx)
+        self.elite_fitness[self.generation] = Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.elite_cities_idx[self.generation])
+        print("original: ", Calculation.evalTotalcost(self.cities_idx[index[0]], self.cities))
+        print("new: ", Calculation.evalTotalcost(self.elite_cities_idx[self.generation], self.cities))
+        print(self.elite_fitness)
+        print("기존: ", self.cities_idx[index[0]])
+        if best_fitness > self.elite_fitness[self.generation]: 
+            self.cities_idx[index[0]] = self.elite_cities_idx[self.generation]
+        print("바뀜: ", self.cities_idx[index[0]])
+        self.generation += 1
+        print(self.generation)

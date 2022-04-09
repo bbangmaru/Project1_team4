@@ -33,7 +33,7 @@ class Calculation:
     def calculate_fitness(original_cities, original_cities_idx, new_cities, new_cities_idx): #원래 city index, 좌표 & 바뀐 city index, 좌표
         original_dist = Calculation.evalTotalcost(original_cities_idx, original_cities)
         new_dist = Calculation.evalTotalcost(new_cities_idx, new_cities)
-        fit = original_dist / new_dist
+        fit = new_dist / original_dist
         return fit
 
     # cities 앞에 참조할 idx 덧붙이는 메소드
