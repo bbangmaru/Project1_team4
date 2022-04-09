@@ -1,4 +1,11 @@
+import random
+import numpy as np
 class Mutation:
+    # 단순 swap
     @staticmethod
-    def randomMutate():
-        return
+    def randomMutate(cities_idx):
+        idx = np.random.choice(cities_idx, size=2, replace=False)
+        first = idx[0]
+        second = idx[1]
+        cities_idx[first], cities_idx[second] = cities_idx[second], cities_idx[first]
+        return cities_idx
