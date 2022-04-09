@@ -70,7 +70,11 @@ class geneTSP:
         print("Selection Start...")
         for i in range(len(self.fitness)):
             print(i, ":", self.fitness[i])
-        index = Select.roulette_wheel(self.fitness)
+        roulette_fit  = [] # roulette fitness
+        for i in range(0, 10):
+            roulette_fit.append(Calculation.roulette_fitness(self.fitness, i, 3))
+        print(roulette_fit)
+        index = Select.roulette_wheel(roulette_fit)
         print("index: ", index)
         print("Crossover Start...")
         new_cities_idx1 = Crossover.order_cross(self.cities_idx1, self.cities_idx2)

@@ -21,6 +21,13 @@ class Calculation:
             total_cost += dist
         return total_cost
 
+    @staticmethod
+    def roulette_fitness(fitness, cur_idx, k):
+        best = min(fitness)
+        worst = max(fitness)
+        cur = fitness[cur_idx]
+        fit = (worst - cur) + (worst - best) / (k - 1)
+        return fit
     # fitness calculation - 적합도 계산
     @staticmethod
     def calculate_fitness(original_cities, original_cities_idx, new_cities, new_cities_idx): #원래 city index, 좌표 & 바뀐 city index, 좌표
