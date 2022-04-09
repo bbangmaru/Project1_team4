@@ -13,12 +13,15 @@ class Select:
     @staticmethod
     def roulette_wheel(fitness):
         fitnessSum = 0
+        idx = 0
         for i in range(len(fitness)):
             fitnessSum += fitness[i]
-        point = random.random() * fitnessSum
-        s = 0
-        for i in range(len(fitness)):
-            s += fitness[i]
-            if point < s:
-                return i
+        print("fitnessSum: ", fitnessSum)
+        point = random.uniform(0, fitnessSum)
+        print("point: ", point)
+        while point > 0:
+            point -= fitness[idx]
+            idx += 1
+        idx -= 1
+        return idx
 

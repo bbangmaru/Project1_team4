@@ -50,16 +50,16 @@ class geneTSP:
         random.shuffle(self.cities_idx10)
 
         # 초기 fitness 설정
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx1))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx2))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx3))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx4))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx5))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx6))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx7))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx8))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx9))
-        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities_idx10))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx1))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx2))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx3))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx4))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx5))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx6))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx7))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx8))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx9))
+        self.fitness.append(Calculation.calculate_fitness(self.cities, self.cities_idx, self.cities, self.cities_idx10))
             
     
         
@@ -69,11 +69,11 @@ class geneTSP:
         print("Calculate Fitness...")
         print("Selection Start...")
         for i in range(len(self.fitness)):
-            print(i +":"+ self.fitness[i])
+            print(i, ":", self.fitness[i])
         index = Select.roulette_wheel(self.fitness)
         print("index: ", index)
         print("Crossover Start...")
         new_cities_idx1 = Crossover.order_cross(self.cities_idx1, self.cities_idx2)
-        Calculation.calculate_fitness(self.cities, new_cities_idx1, self.cities_idx2)
+        Calculation.calculate_fitness(self.cities, self.cities_idx1, self.cities, self.cities_idx2)
         print("Mutation Start...")
         

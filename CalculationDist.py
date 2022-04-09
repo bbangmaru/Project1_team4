@@ -23,7 +23,7 @@ class Calculation:
 
     # fitness calculation - 적합도 계산
     @staticmethod
-    def calculate_fitness(original_cities_idx, original_cities, new_cities_idx, new_cities): #원래 city index, 좌표 & 바뀐 city index, 좌표
+    def calculate_fitness(original_cities, original_cities_idx, new_cities, new_cities_idx): #원래 city index, 좌표 & 바뀐 city index, 좌표
         original_dist = Calculation.evalTotalcost(original_cities_idx, original_cities)
         new_dist = Calculation.evalTotalcost(new_cities_idx, new_cities)
         fit = original_dist / new_dist
