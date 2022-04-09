@@ -50,7 +50,7 @@ print("=    2 : GeneticTSP            =")
 print("=    3 : GeneticTSP + tree     =")
 print("=                              =")
 print("================================")
-print("Input option : ")
+print("Input option : ", end = '')
 
 option = int(input())
 if option == 1:
@@ -60,9 +60,17 @@ if option == 1:
     #print(sol)
 
 elif option == 2:
-    print("option 2")
-    gtsp = geneticTSP.geneTSP()
-    gtsp.execute()
+    gTSP = geneticTSP.geneTSP(30, 50)
+    print(gTSP.evolution())
+
+    ''' 함수로 만들거 >>
+    idx = sol.index(0)  # ?
+    front = sol[idx:]  # ? ~ 1000
+    back = sol[0:idx]  # 0 ~ ?
+    sol = front + back  # 두개를 합침
+    # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
+    sol.append(int(0))
+    '''
 
 elif option == 3:
     print("Clustering...")

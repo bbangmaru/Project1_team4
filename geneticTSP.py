@@ -7,128 +7,80 @@ from MakeCrossover import Crossover
 from Selection import Select
 
 
-class geneTSP:
-    generation = 1
-    cities = []
-    cities_idx_ = []
-    # 해집단 10개
-    cities_idx = [[0 for i in range(1000)] for j in range(10)]
-    '''
-        cities_idx1 = []
-        cities_idx2 = []
-        cities_idx3 = []
-        cities_idx4 = []
-        cities_idx5 = []
-        cities_idx6 = []
-        cities_idx7 = []
-        cities_idx8 = []
-        cities_idx9 = []
-        cities_idx10 = []
-    '''
-    fitness = []
-    elite_cities_idx = [0 for i in range(10)] # 유전 과정을 한번 거친 해집합에 대한 도시 정보
-    elite_fitness = [0 for i in range(10)]  # 유전 과정을 한번 거친 해집합에 대한 fitness
+class geneTSP():
+    generation = 1                  # 세대
+    cities = []                     # 도시 좌표
+    cities_idx_original = []        # 도시 인덱스
+    sol = 0                         # 해집단 초기화
+    gen = 0                         # 총세대 초기화
+    cities_idx = []                 # 도시 인덱스 * 해집단 수만큼 선언
+    best_fitness = -1               # best_fitness 초기값 설정
+    fitness = []                    # fitness
+    elite_cities_idx = []           # 유전 과정을 한번 거친 해집합에 대한 도시 정보
+    elite_fitness = []              # 유전 과정을 한번 거친 해집합에 대한 fitness
 
-    def __init__(self):
+    # 클래스 초기화
+    def __init__(self, sol, gen):
+        self.sol = sol
+        self.gen = gen
+        self.cities_idx = [[0 for _ in range(1000)] for _ in range(sol)]
+        self.elite_cities_idx = [0 for _ in range(sol)]
+        self.elite_fitness = [0 for _ in range(sol)]
+
         with open("TSP.csv", mode='r', newline='') as tsp:
             reader = csv.reader(tsp)
             for row in reader:
                 self.cities.append(row)
-        for i in range(0, 1000):
-            self.cities_idx_.append(i)
-        self.cities_idx[0] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[0])
-        self.cities_idx[1] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[1])
-        self.cities_idx[2] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[2])
-        self.cities_idx[3] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[3])
-        self.cities_idx[4] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[4])
-        self.cities_idx[5] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[5])
-        self.cities_idx[6] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[6])
-        self.cities_idx[7] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[7])
-        self.cities_idx[8] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[8])
-        self.cities_idx[9] = self.cities_idx_.copy()
-        random.shuffle(self.cities_idx[9])
 
-        '''
-            self.cities_idx1 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx1)
-            self.cities_idx2 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx2)
-            self.cities_idx3 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx3)
-            self.cities_idx4 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx4)
-            self.cities_idx5 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx5)
-            self.cities_idx6 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx6)
-            self.cities_idx7 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx7)
-            self.cities_idx8 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx8)
-            self.cities_idx9 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx9)
-            self.cities_idx10 = self.cities_idx.copy()
-            random.shuffle(self.cities_idx10)
-            '''
+        for i in range(1000):
+            self.cities_idx_original.append(i)
+
+        for i in range(self.sol):
+            self.cities_idx[i] = self.cities_idx_original.copy()
+            random.shuffle(self.cities_idx[i])
 
         # 초기 fitness 설정
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[0]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[1]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[2]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[3]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[4]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[5]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[6]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[7]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[8]))
-        self.fitness.append(
-            Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.cities_idx[9]))
-        
+        for i in range(self.sol):
+            self.fitness.append(
+                Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.cities_idx[i]))
 
     # 실제로 실행 담당하는 함수
-    def execute(self):
-        print("=============================================")
-        print("Calculate Fitness...")
-        print("Selection Start...")
-        for i in range(len(self.fitness)):
-            print(i, ":", self.fitness[i])
+    def execute(self, count):
         roulette_fit = []
+
         # roulette fitness
         for i in range(0, 10):
             roulette_fit.append(Calculation.roulette_fitness(self.fitness, i, 3))
-        print(roulette_fit)
+
         index = Select.roulette_wheel(roulette_fit)
+
         self.elite_fitness[0] = self.fitness[index[0]]
-        best_fitness = self.elite_fitness[0]
-        print("Crossover Start...")
+        if self.best_fitness == -1:
+            self.best_fitness = self.elite_fitness[0]
+
         new_cities_idx = Crossover.order_cross(self.cities_idx[index[0]], self.cities_idx[index[1]])
-        print("Mutation Start...")
-        self.elite_cities_idx[self.generation] = Mutation.randomMutate(new_cities_idx)
-        self.elite_fitness[self.generation] = Calculation.calculate_fitness(self.cities, self.cities_idx_, self.cities, self.elite_cities_idx[self.generation])
-        print("original: ", Calculation.evalTotalcost(self.cities_idx[index[0]], self.cities))
-        print("new: ", Calculation.evalTotalcost(self.elite_cities_idx[self.generation], self.cities))
-        print(self.elite_fitness)
-        print("기존: ", self.cities_idx[index[0]])
-        if best_fitness > self.elite_fitness[self.generation]: 
-            self.cities_idx[index[0]] = self.elite_cities_idx[self.generation]
-        print("바뀜: ", self.cities_idx[index[0]])
-        self.generation += 1
-        print(self.generation)
+
+        self.elite_cities_idx[count] = Mutation.randomMutate(new_cities_idx)
+        self.elite_fitness[count] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.elite_cities_idx[count])
+
+        if self.best_fitness > self.elite_fitness[count]:
+            self.cities_idx[index[0]] = self.elite_cities_idx[count]
+            self.best_fitness = self.elite_fitness[count]
+
+    def evolution(self):
+        evolarr = [0 for _ in range(self.sol)]
+
+        # sol * gen
+        for j in range(self.gen):
+            for i in range(self.sol):
+                self.execute(i)
+                evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
+            self.generation += 1
+
+        # 마지막 세대 output
+        print(self.elite_cities_idx[evolarr.index(min(evolarr))])       # 마지막 세대 solution
+        print(evolarr.index(min(evolarr)))                              # 마지막 세대 dist
+
+        return min(evolarr)
+
+
