@@ -101,7 +101,7 @@ class geneTSP():
         # sol * gen
         for _ in range(self.gen):
             for i in range(self.sol):
-                self.execute2(i)
+                self.execute1(i)
                 evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
             self.generation += 1
 

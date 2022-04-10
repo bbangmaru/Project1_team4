@@ -11,6 +11,7 @@ from MakeMutation import Mutation # 변이 담당
 from Selection import Select # 선택 담당 - fitness 함수를 정의하면 됨
 from Tree import TreeSearch # 트리 search 담당
 import geneticTSP
+import geneticPlusTSP
 
 df = pd.read_csv("TSP.csv", header=None, names=['x', 'y'])
 #print(df)
@@ -60,7 +61,7 @@ if option == 1:
     #print(sol)
 
 elif option == 2:
-    gTSP = geneticTSP.geneTSP(20, 100) #반복 횟수, 세대 횟수
+    gTSP = geneticTSP.geneTSP(100, 500) #반복 횟수, 세대 횟수
     result = gTSP.evolution()
     print(result)
     ''' 함수로 만들거 >>
@@ -73,15 +74,9 @@ elif option == 2:
     '''
 
 elif option == 3:
-    print("Clustering...")
-    kcluster = Clustering()
-    k = 10
-    center_city_coord, child_city_idx, child_city_coord = kcluster.clusterTSP(df, k, cities)
-    print("Tree Searching...")
-    picked = [0 for _ in range(k)]
-    tree_search_cost, tree_search_path = TreeSearch.DFS(picked, center_city_coord, k, 0)
-    print(tree_search_cost)
-    print(tree_search_path)
+    k = 10 # 군집화 개수
+    gplusTSP = geneticPlusTSP.geneplusTSP(k)
+    gplusTSP.execute()
 
 '''
 elif option == 0:
