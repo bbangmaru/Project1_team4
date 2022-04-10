@@ -45,7 +45,7 @@ class geneTSP():
         for i in range(self.sol):
             self.fitness[i] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.cities_idx[i])
 
-    # 실제로 실행 담당하는 함수1 - 룰렛 휠 선택 사용
+    # 실제로 실행 담당하는 함수1 - 룰렛 휠 선택, 순서 교차 사용
     def execute1(self, count):
         roulette_fit = [0 for _ in range(self.sol)]
 
@@ -59,8 +59,10 @@ class geneTSP():
         if self.best_fitness == -1:
             self.best_fitness = self.elite_fitness[0]
 
+        # CrossOver - order cross
         new_cities_idx = Crossover.order_cross(self.cities_idx[index[0]], self.cities_idx[index[1]])
 
+        #Mutation
         self.elite_cities_idx[count] = Mutation.randomMutate(new_cities_idx)
         self.elite_fitness[count] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.elite_cities_idx[count])
 
@@ -68,13 +70,13 @@ class geneTSP():
             self.cities_idx[index[0]] = self.elite_cities_idx[count]
             self.best_fitness = self.elite_fitness[count]
 
-    # 실제로 실행 담당하는 함수2 - 토너먼트 선택 사용
+    # 실제로 실행 담당하는 함수2 - pmx 교차 연산 사용
     def execute2(self, count):
-        roulette_fit = []
+        roulette_fit = [0 for _ in range(self.sol)]
 
         # roulette fitness
-        for i in range(0, 10):
-            roulette_fit.append(Calculation.roulette_fitness(self.fitness, i, 3))
+        for i in range(0, self.sol):
+            roulette_fit[i] = Calculation.roulette_fitness(self.fitness, i, 3)
 
         index = Select.roulette_wheel(roulette_fit)
 
@@ -82,8 +84,10 @@ class geneTSP():
         if self.best_fitness == -1:
             self.best_fitness = self.elite_fitness[0]
 
-        new_cities_idx = Crossover.order_cross(self.cities_idx[index[0]], self.cities_idx[index[1]])
+        # CrossOver - pmx
+        new_cities_idx = Crossover.pmx(self.cities_idx[index[0]], self.cities_idx[index[1]])
 
+        #Mutation
         self.elite_cities_idx[count] = Mutation.randomMutate(new_cities_idx)
         self.elite_fitness[count] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.elite_cities_idx[count])
 
@@ -97,7 +101,7 @@ class geneTSP():
         # sol * gen
         for _ in range(self.gen):
             for i in range(self.sol):
-                self.execute1(i)
+                self.execute2(i)
                 evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
             self.generation += 1
 

@@ -60,7 +60,7 @@ if option == 1:
     #print(sol)
 
 elif option == 2:
-    gTSP = geneticTSP.geneTSP(100, 100) #반복 횟수, 세대 횟수
+    gTSP = geneticTSP.geneTSP(20, 100) #반복 횟수, 세대 횟수
     result = gTSP.evolution()
     print(result)
     ''' 함수로 만들거 >>
