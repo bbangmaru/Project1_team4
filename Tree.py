@@ -14,6 +14,6 @@ class TreeSearch:
                 cost, pick = TreeSearch.DFS(picked, center_city_coord, k, depth + 1) # 재귀호출로 depth 1씩 증가시키며 DFS 구현
                 if min_cost > cost: # min_cost update하고 해당 경로 저장
                     min_cost = cost
-                    min_path = pick.copy() # visit이 지역변수라 copy안하면 사라짐
+                    min_path = pick.copy()
                 picked[depth] = 0 # 다시 0으로 만들어주기
         return min_cost, min_path

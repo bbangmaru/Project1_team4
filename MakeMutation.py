@@ -5,7 +5,7 @@ class Mutation:
     @staticmethod
     def randomMutate(cities_idx):
         idx = np.random.choice(cities_idx, size=2, replace=False)
-        first = idx[0]
-        second = idx[1]
+        first = cities_idx.index(idx[0])
+        second = cities_idx.index(idx[1])
         cities_idx[first], cities_idx[second] = cities_idx[second], cities_idx[first]
         return cities_idx

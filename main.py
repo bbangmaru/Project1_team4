@@ -22,14 +22,10 @@ with open("TSP.csv", mode='r', newline='') as tsp:
         cities.append(row)
 
 sol = []
-
-#1. get solution sequence and reordering (sort from 0)
-with open("example_solution.csv", mode='r', newline='') as solution:
-    # read solution sequence
+with open('example_solution.csv', mode='r', newline='') as solution:
     reader = csv.reader(solution)
     for row in reader:
         sol.append(int(row[0]))
-    # reordering solution sequence, 해답 sequence를 재배치
     idx = sol.index(0) # 189
 
     front = sol[idx:] # 189 ~ 1000
@@ -39,6 +35,21 @@ with open("example_solution.csv", mode='r', newline='') as solution:
     sol = front + back # 두개를 합침
     # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
     sol.append(int(0))
+
+
+def finalManipulate(final_path):
+    # reordering solution sequence, 해답 sequence를 재배치
+    idx = final_path.index(0) # 189
+
+    front = final_path[idx:] # 189 ~ 1000
+
+    back = final_path[0:idx] # 0 ~ 189
+
+    final_path = front + back # 두개를 합침
+    # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
+    final_path.append(int(0))
+
+    return final_path
 
 
 os.system("cls")
@@ -61,49 +72,19 @@ if option == 1:
     #print(sol)
 
 elif option == 2:
-    gTSP = geneticTSP.geneTSP(100, 500) #반복 횟수, 세대 횟수
-    result = gTSP.evolution()
-    print(result)
-    ''' 함수로 만들거 >>
-    idx = sol.index(0)  # ?
-    front = sol[idx:]  # ? ~ 1000
-    back = sol[0:idx]  # 0 ~ ?
-    sol = front + back  # 두개를 합침
-    # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
-    sol.append(int(0))
-    '''
+    gTSP = geneticTSP.geneTSP(10, 50, None) #반복 횟수, 세대 횟수, 도시 개수
+    sol_idx, result = gTSP.evolution()
+    sol_idx = finalManipulate(sol_idx)
+    print(sol_idx)
+    print(Calculation.evalTotalcost(sol_idx, cities))
 
 elif option == 3:
     k = 10 # 군집화 개수
-    gplusTSP = geneticPlusTSP.geneplusTSP(k)
-    gplusTSP.execute()
-
-'''
-elif option == 0:
-    idx = list(range(0, 200))
-    c = cities[:200]
-    #print(Calculation.idxarray(idx, c))
-    idxArr = Calculation.idxarray(idx, c)
-    #print(Calculation.distantarray(idxArr))
-    f = open("sampleDistantArray.csv", 'w', newline='')
-    wr = csv.writer(f)
-    for row in range(len(idxArr) - 1):
-        wr.writerow(Calculation.distantarray(idxArr)[row])
-    f.close()
-'''
-
-
-"""
-# kcluster instance 생성
-kcluster = Clustering()
-k = 10
-center_city_coord, child_city_idx, child_city_coord = kcluster.clusterTSP(df, k, cities)
-picked = [0 for _ in range(k)]
-tree_search_cost, tree_search_path = TreeSearch.DFS(picked, center_city_coord, k, 0)
-print(tree_search_cost)
-print(tree_search_path)
-"""
-
+    gplusTSP = geneticPlusTSP.geneplusTSP(k, 20, 100) # 군집 개수, 해집단 개수, 세대 수
+    final_path = gplusTSP.execute()
+    final_path = finalManipulate(final_path)
+    print(final_path)
+    print(Calculation.evalTotalcost(final_path, cities))
 
 
 

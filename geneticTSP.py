@@ -18,32 +18,60 @@ class geneTSP():
     fitness = []                    # fitness
     elite_cities_idx = []           # 유전 과정을 한번 거친 해집합에 대한 도시 정보
     elite_fitness = []              # 유전 과정을 한번 거친 해집합에 대한 fitness
-
+    citynum = 0
     # 클래스 초기화
-    def __init__(self, sol, gen):
-        self.sol = sol
-        self.gen = gen
-        self.cities_idx = [[0 for _ in range(1000)] for _ in range(sol)]
-        self.elite_cities_idx = [0 for _ in range(sol)]
-        self.elite_fitness = [0 for _ in range(sol)]
-        self.cities_idx_original = [0 for _ in range(1000)]
-        self.fitness = [0 for _ in range(sol)]
+    def __init__(self, sol, gen, child_cities_idx):        
+        if child_cities_idx == None: # option 2
+            self.sol = sol
+            self.gen = gen
+            self.cities_idx = [[0 for _ in range(1000)] for _ in range(sol)]
+            self.elite_cities_idx = [0 for _ in range(sol)]
+            self.elite_fitness = [0 for _ in range(sol)]
+            self.cities_idx_original = [0 for _ in range(1000)]
+            self.fitness = [0 for _ in range(sol)]
+
+            with open("TSP.csv", mode='r', newline='') as tsp:
+                reader = csv.reader(tsp)
+                for row in reader:
+                    self.cities.append(row)
+
+            for i in range(1000):
+                self.cities_idx_original[i] = i
+
+            for i in range(self.sol):
+                self.cities_idx[i] = self.cities_idx_original.copy()
+                random.shuffle(self.cities_idx[i])
+
+            # 초기 fitness 설정
+            for i in range(self.sol):
+                self.fitness[i] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.cities_idx[i])
         
-        with open("TSP.csv", mode='r', newline='') as tsp:
-            reader = csv.reader(tsp)
-            for row in reader:
-                self.cities.append(row)
+        else:
+            self.sol = sol
+            self.gen = gen
+            self.citynum = len(child_cities_idx)
+            self.cities_idx = [[0 for _ in range(self.citynum)] for _ in range(sol)]
+            self.elite_cities_idx = [0 for _ in range(sol)]
+            self.elite_fitness = [0 for _ in range(sol)]
+            self.cities_idx_original = [0 for _ in range(self.citynum)]
+            self.fitness = [0 for _ in range(sol)]
+            with open("TSP.csv", mode='r', newline='') as tsp:
+                reader = csv.reader(tsp)
+                for row in reader:
+                    self.cities.append(row)
 
-        for i in range(1000):
-            self.cities_idx_original[i] = i
+            self.cities_idx_original = child_cities_idx.copy()
 
-        for i in range(self.sol):
-            self.cities_idx[i] = self.cities_idx_original.copy()
-            random.shuffle(self.cities_idx[i])
+            for i in range(self.sol):
+                self.cities_idx[i] = self.cities_idx_original.copy()
+                random.shuffle(self.cities_idx[i])
 
-        # 초기 fitness 설정
-        for i in range(self.sol):
-            self.fitness[i] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.cities_idx[i])
+            # 초기 fitness 설정
+            for i in range(self.sol):
+                self.fitness[i] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.cities_idx[i])
+        
+        
+        
 
     # 실제로 실행 담당하는 함수1 - 룰렛 휠 선택, 순서 교차 사용
     def execute1(self, count):
@@ -106,9 +134,9 @@ class geneTSP():
             self.generation += 1
 
         # 마지막 세대 output
-        print(self.elite_cities_idx[evolarr.index(min(evolarr))])       # 마지막 세대 solution
+        #print(self.elite_cities_idx[evolarr.index(min(evolarr))])       # 마지막 세대 solution
         #print(min(evolarr))                                             # 마지막 세대 dist
 
-        return min(evolarr)
+        return self.elite_cities_idx[evolarr.index(min(evolarr))], min(evolarr)
 
 
