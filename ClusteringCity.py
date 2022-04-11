@@ -27,6 +27,7 @@ class Clustering:
                 child.append(cities[head[j]])
             child_city.append(child)
 
+        #Clustering 추가
         plt.scatter(df.x, df.y, c=labels, s=10, alpha=0.5) # c 값으로 각각의 sample이 속해있는 cluster index 별로 색상 나누기, labels에는 인덱스 저장되어 있음
         plt.scatter(center[:, 0], center[:, 1], color="RED", s=100, marker='*') # 별은 중심점을 의미
         plt.title("CITY CLUSTER")
