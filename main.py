@@ -32,7 +32,10 @@ def finalManipulate(final_path):
 
 
 @click.command()
-@click.option('--option',   type=click.INT, help='1=Random | 2=Genetic TSP | 3=Genetic TSP with Tree Search', default=1)
+@click.option('--option',   type=click.INT, help='Option Number:'
+                                                 '  1=Random'
+                                                 '  2=Genetic TSP'
+                                                 '  3=Genetic TSP with Tree Search', default=1)
 def main(option):
     df = pd.read_csv("TSP.csv", header=None, names=['x', 'y'])
     # print(df)
