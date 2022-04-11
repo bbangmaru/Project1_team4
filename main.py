@@ -2,6 +2,7 @@ import csv
 import os
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from CompleteRandomSearch import CRS # 완전 무작위 탐색
 from CalculationDist import Calculation # 계산 담당
@@ -80,12 +81,10 @@ elif option == 2:
 
 elif option == 3:
     k = 10 # 군집화 개수
-    gplusTSP = geneticPlusTSP.geneplusTSP(k, 20, 100) # 군집 개수, 해집단 개수, 세대 수
+    gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 10) # 군집 개수, 해집단 개수, 세대 수
     final_path = gplusTSP.execute()
     final_path = finalManipulate(final_path)
     print(final_path)
     print(Calculation.evalTotalcost(final_path, cities))
-
-
 
 
