@@ -1,6 +1,5 @@
 from sklearn.cluster import KMeans
-import numpy as np
-import matplotlib.pyplot as plt
+
 # head_cluster_city: 중심점의 좌표값 저장
 # child_city_idxs: 중심점과 연관되어 있는 도시들의 index 정보
 # child_cluster_city: 중심점과 연관되어 있는 도시들의 좌표값 저장

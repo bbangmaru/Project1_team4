@@ -1,17 +1,10 @@
 import csv
 import os
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import click
 
 from CompleteRandomSearch import CRS # 완전 무작위 탐색
 from CalculationDist import Calculation # 계산 담당
-from ClusteringCity import Clustering # 클러스터링 담당
-from MakeCrossover import Crossover # 교차연산 담당
-from MakeMutation import Mutation # 변이 담당
-from Selection import Select # 선택 담당 - fitness 함수를 정의하면 됨
-from Tree import TreeSearch # 트리 search 담당
 import geneticTSP
 import geneticPlusTSP
 
@@ -58,7 +51,6 @@ def main(option):
         sol.append(int(0))
 
     os.system("cls")
-    #  option = int(input())
     if option == 1:
         print("================================")
         print("=    Complete Random Search    =")
@@ -74,7 +66,6 @@ def main(option):
         gTSP = geneticTSP.geneTSP(10, 1000, None)  # 반복 횟수, 세대 횟수, 도시 개수
         sol_idx, result = gTSP.evolution()
         sol_idx = finalManipulate(sol_idx)
-        # print(sol_idx)
         print("final total : " + str(Calculation.evalTotalcost(sol_idx, cities)))
 
     elif option == 3:
@@ -82,11 +73,10 @@ def main(option):
         print("= Genetic TSP with Tree Search =")
         print("================================")
 
-        k = 12  # 군집화 개수
-        gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 100)  # 군집 개수, 해집단 개수, 세대 수
+        k = 10  # 군집화 개수
+        gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 1000)  # 군집 개수, 해집단 개수, 세대 수
         final_path = gplusTSP.execute()
         final_path = finalManipulate(final_path)
-        # print(final_path)
         print("final total : " + str(Calculation.evalTotalcost(final_path, cities)))
 
 

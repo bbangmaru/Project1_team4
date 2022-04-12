@@ -1,9 +1,4 @@
-# 3. 트리 구조를 활용한 유전 알고리즘 구현 파일
-from CalculationDist import Calculation # 계산 담당
 from ClusteringCity import Clustering # 클러스터링 담당
-from MakeCrossover import Crossover # 교차연산 담당
-from MakeMutation import Mutation # 변이 담당
-from Selection import Select # 선택 담당 - fitness 함수를 정의하면 됨
 from Tree import TreeSearch # 트리 search 담당
 import geneticTSP
 import pandas as pd
@@ -34,7 +29,6 @@ class geneplusTSP():
         for i in range(self.k):
             g = geneticTSP.geneTSP(self.k, self.gen, child_city_idx[i])
             sol, ret = g.evolution()
-            #print("cluster ", i, ": ", sol)
             rets.append(ret)
             sol_path.append(sol)
 
