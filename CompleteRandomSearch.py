@@ -2,10 +2,10 @@ import random
 import time
 import CalculationDist as cd
 
-
-class CRS:
+class CRS():
     # CompleteRandomSearch
     # shuffle solution and generate RandomSearch by 10secs
+
     @staticmethod
     def cost(s, c):
         final_cost = 99999

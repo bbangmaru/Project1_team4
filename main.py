@@ -56,7 +56,6 @@ def main(option):
         print("================================")
         print("=    Complete Random Search    =")
         print("================================")
-        print("wait for 10secs...")
         start = time.time()
         print("final total : " + str(CRS.cost(sol, cities)))
         end = time.time()

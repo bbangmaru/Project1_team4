@@ -23,7 +23,7 @@ class geneplusTSP():
         # Clustering 시작
         kcluster = Clustering()
         center_city_coord, child_city_idx = kcluster.clusterTSP(self.df, self.k, self.cities)
-        print(center_city_coord)
+
         rets = []
         sol_path = []
         for i in range(self.k):
