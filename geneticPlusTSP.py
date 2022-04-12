@@ -9,8 +9,10 @@ class geneplusTSP():
     k = 0
     sol = 0
     gen = 0
+    cross = 'pmx'
     df = pd.read_csv("TSP.csv", header=None, names=['x', 'y'])
-    def __init__(self, k, sol, gen):
+
+    def __init__(self, k, sol, gen, cross):
         with open("TSP.csv", mode='r', newline='') as tsp:
             reader = csv.reader(tsp)
             for row in reader:
@@ -18,6 +20,7 @@ class geneplusTSP():
         self.k = k
         self.sol = sol
         self.gen = gen
+        self.cross = cross
         
     def execute(self):
         # Clustering 시작
@@ -27,7 +30,7 @@ class geneplusTSP():
         rets = []
         sol_path = []
         for i in range(self.k):
-            g = geneticTSP.geneTSP(self.k, self.gen, child_city_idx[i])
+            g = geneticTSP.geneTSP(self.k, self.gen, child_city_idx[i], self.cross)
             sol, ret = g.evolution()
             rets.append(ret)
             sol_path.append(sol)

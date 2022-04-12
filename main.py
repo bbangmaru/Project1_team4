@@ -26,8 +26,15 @@ def finalManipulate(final_path):
 
 
 @click.command()
-@click.option('--option',   type=click.INT, help='1=Random | 2=Genetic TSP | 3=Genetic TSP with Tree Search', default=1)
-def main(option):
+@click.option('--option',   type=click.INT,     help='1=Random | '
+                                                     '2=Genetic TSP | '
+                                                     '3=Genetic TSP with Tree Search',   default=1)
+@click.option('--k',        type=click.INT,     help='number of Clusters',               default=10)
+@click.option('--s',        type=click.INT,     help='number of Solution Groups',        default=10)
+@click.option('--g',        type=click.INT,     help='number of Generations',            default=1000)
+@click.option('--c',        type=click.STRING,  help='Crossover method : '
+                                                     'pmx || order',                      default='pmx')
+def main(option, k, s, g, c):
     df = pd.read_csv("TSP.csv", header=None, names=['x', 'y'])
     # print(df)
     cities = []
@@ -42,11 +49,8 @@ def main(option):
         for row in reader:
             sol.append(int(row[0]))
         idx = sol.index(0)  # 189
-
         front = sol[idx:]  # 189 ~ 1000
-
         back = sol[0:idx]  # 0 ~ 189
-
         sol = front + back  # 두개를 합침
         # expand 0 city(start) for simplicity, 간단하게 생각하기 위해 도시 0부터 시작하는 걸로!
         sol.append(int(0))
@@ -67,7 +71,7 @@ def main(option):
         print("================================")
 
         start = time.time()
-        gTSP = geneticTSP.geneTSP(10, 1000, None)  # 반복 횟수, 세대 횟수, 도시 개수
+        gTSP = geneticTSP.geneTSP(s, g, None, c)  # 해집단 수, 세대 수, 도시 개수
         sol_idx, result = gTSP.evolution()
         sol_idx = finalManipulate(sol_idx)
         print("final total : " + str(Calculation.evalTotalcost(sol_idx, cities)))
@@ -79,9 +83,8 @@ def main(option):
         print("= Genetic TSP with Tree Search =")
         print("================================")
 
-        k = 10  # 군집화 개수
         start = time.time()
-        gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 2000)  # 군집 개수, 해집단 개수, 세대 수
+        gplusTSP = geneticPlusTSP.geneplusTSP(k, s, g, c)  # 군집 개수, 해집단 수, 세대 수
         final_path = gplusTSP.execute()
         final_path = finalManipulate(final_path)
         print("final total : " + str(Calculation.evalTotalcost(final_path, cities)))

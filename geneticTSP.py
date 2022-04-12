@@ -19,8 +19,10 @@ class geneTSP():
     elite_cities_idx = []           # 유전 과정을 한번 거친 해집합에 대한 도시 정보
     elite_fitness = []              # 유전 과정을 한번 거친 해집합에 대한 fitness
     citynum = 0
+    cross = 'pmx'
+
     # 클래스 초기화
-    def __init__(self, sol, gen, child_cities_idx):        
+    def __init__(self, sol, gen, child_cities_idx, cross):
         if child_cities_idx == None:  # option 2
             self.sol = sol
             self.gen = gen
@@ -29,6 +31,7 @@ class geneTSP():
             self.elite_fitness = [0 for _ in range(sol)]
             self.cities_idx_original = [0 for _ in range(1000)]
             self.fitness = [0 for _ in range(sol)]
+            self.cross = cross
 
             with open("TSP.csv", mode='r', newline='') as tsp:
                 reader = csv.reader(tsp)
@@ -55,6 +58,7 @@ class geneTSP():
             self.elite_fitness = [0 for _ in range(sol)]
             self.cities_idx_original = [0 for _ in range(self.citynum)]
             self.fitness = [0 for _ in range(sol)]
+            self.cross = cross
             with open("TSP.csv", mode='r', newline='') as tsp:
                 reader = csv.reader(tsp)
                 for row in reader:
@@ -126,7 +130,10 @@ class geneTSP():
         # sol * gen
         for _ in range(self.gen):
             for i in range(self.sol):
-                self.execute2(i)
+                if self.cross == 'order':
+                    self.execute1(i)
+                elif self.cross == 'pmx':
+                    self.execute2(i)
                 evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
             self.generation += 1
 
