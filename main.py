@@ -2,6 +2,7 @@ import csv
 import os
 import pandas as pd
 import click
+import time
 
 from CompleteRandomSearch import CRS # 완전 무작위 탐색
 from CalculationDist import Calculation # 계산 담당
@@ -56,17 +57,23 @@ def main(option):
         print("=    Complete Random Search    =")
         print("================================")
         print("wait for 10secs...")
+        start = time.time()
         print("final total : " + str(CRS.cost(sol, cities)))
+        end = time.time()
+        print("execution time : " + str(end - start))
 
     elif option == 2:
         print("================================")
         print("=          Genetic TSP         =")
         print("================================")
 
+        start = time.time()
         gTSP = geneticTSP.geneTSP(10, 1000, None)  # 반복 횟수, 세대 횟수, 도시 개수
         sol_idx, result = gTSP.evolution()
         sol_idx = finalManipulate(sol_idx)
         print("final total : " + str(Calculation.evalTotalcost(sol_idx, cities)))
+        end = time.time()
+        print("execution time : " + str(end - start))
 
     elif option == 3:
         print("================================")
@@ -74,10 +81,13 @@ def main(option):
         print("================================")
 
         k = 10  # 군집화 개수
-        gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 1000)  # 군집 개수, 해집단 개수, 세대 수
+        start = time.time()
+        gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 2000)  # 군집 개수, 해집단 개수, 세대 수
         final_path = gplusTSP.execute()
         final_path = finalManipulate(final_path)
         print("final total : " + str(Calculation.evalTotalcost(final_path, cities)))
+        end = time.time()
+        print("execution time : " + str(end - start))
 
 
 if __name__ == "__main__":

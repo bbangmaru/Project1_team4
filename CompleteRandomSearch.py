@@ -10,7 +10,7 @@ class CRS:
     def cost(s, c):
         final_cost = 99999
         now = time.time()
-        while now + 10 > time.time():
+        while now + 300 > time.time():
             if final_cost > cd.Calculation.evalTotalcost(s, c):
                 final_cost = cd.Calculation.evalTotalcost(s, c)
             random.shuffle(s)
