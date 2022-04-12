@@ -21,7 +21,7 @@ class geneTSP():
     citynum = 0
     # 클래스 초기화
     def __init__(self, sol, gen, child_cities_idx):        
-        if child_cities_idx == None: # option 2
+        if child_cities_idx == None:  # option 2
             self.sol = sol
             self.gen = gen
             self.cities_idx = [[0 for _ in range(1000)] for _ in range(sol)]
@@ -69,9 +69,6 @@ class geneTSP():
             # 초기 fitness 설정
             for i in range(self.sol):
                 self.fitness[i] = Calculation.calculate_fitness(self.cities, self.cities_idx_original, self.cities, self.cities_idx[i])
-        
-        
-        
 
     # 실제로 실행 담당하는 함수1 - 룰렛 휠 선택, 순서 교차 사용
     def execute1(self, count):

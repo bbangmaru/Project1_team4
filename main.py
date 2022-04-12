@@ -64,7 +64,6 @@ def main(option):
         print("=    Complete Random Search    =")
         print("================================")
         print("wait for 10secs...")
-        sol = CRS.shuffle(sol)
         print("final total : " + str(CRS.cost(sol, cities)))
 
     elif option == 2:
@@ -83,8 +82,8 @@ def main(option):
         print("= Genetic TSP with Tree Search =")
         print("================================")
 
-        k = 10  # 군집화 개수
-        gplusTSP = geneticPlusTSP.geneplusTSP(k, 20, 100)  # 군집 개수, 해집단 개수, 세대 수
+        k = 12  # 군집화 개수
+        gplusTSP = geneticPlusTSP.geneplusTSP(k, 10, 100)  # 군집 개수, 해집단 개수, 세대 수
         final_path = gplusTSP.execute()
         final_path = finalManipulate(final_path)
         # print(final_path)
