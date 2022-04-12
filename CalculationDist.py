@@ -35,39 +35,3 @@ class Calculation:
         new_dist = Calculation.evalTotalcost(new_cities_idx, new_cities)
         fit = new_dist / original_dist
         return fit
-
-    # cities 앞에 참조할 idx 덧붙이는 메소드
-    # idxArr = [idx, cities.x, cities.y]
-    @staticmethod
-    def idxarray(s, c):
-        idxArr = [[0 for col in range(3)] for row in range(len(s) - 1)]
-        for i in range(len(s) - 1):
-            idxArr[i][0] = s[i]
-            idxArr[i][1] = float(c[s[i]][0])
-            idxArr[i][2] = float(c[s[i]][1])
-        return idxArr
-
-    # 인접 행렬 반환 메소드
-    # i == j인 원소에 인덱스, i != j인 원소에 인접 행렬 거리
-    @staticmethod
-    def distantarray(idxArr):
-        da = [[0 for i in range(len(idxArr) - 1)] for j in range(len(idxArr) - 1)]
-        for i in range(len(idxArr) - 1):
-            for j in range(len(idxArr) - 1):
-                if i == j:
-                    da[i][j] = idxArr[i][0]
-                elif i != j:
-                    da[i][j] = Calculation.calculate_dist\
-                        ((idxArr[i][1], idxArr[i][2]),(idxArr[j][1], idxArr[j][2]))
-        return da
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,3 @@
-from email import header
 import random
 import numpy as np
 
@@ -34,9 +33,9 @@ class Crossover:
             # 앞 부분 비교
             compare1 = ret[start_idx:]
             for i in range(start_idx):
-                if ret[i] in compare1: # 중복된 요소가 있는 경우
-                    point = cities_idx1.index(ret[i]) # 해당 위치를 cities_idx1에서 찾아온다
-                    ret[i] = cities_idx2[point] # 해당 위치에 해당하는 요소를 cities_idx2에서 찾아서 대입
+                if ret[i] in compare1:                  # 중복된 요소가 있는 경우
+                    point = cities_idx1.index(ret[i])   # 해당 위치를 cities_idx1에서 찾아온다
+                    ret[i] = cities_idx2[point]         # 해당 위치에 해당하는 요소를 cities_idx2에서 찾아서 대입
                     flag = False
 
             # 뒷 부분 비교

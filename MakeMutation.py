@@ -1,4 +1,3 @@
-import random
 import numpy as np
 class Mutation:
     # 단순 swap

@@ -1,5 +1,6 @@
 from CalculationDist import Calculation
 
+
 class TreeSearch:
     # backtracking DFS?
     @staticmethod
@@ -12,8 +13,8 @@ class TreeSearch:
             if i not in picked:
                 picked[depth] = i
                 cost, pick = TreeSearch.DFS(picked, center_city_coord, k, depth + 1) # 재귀호출로 depth 1씩 증가시키며 DFS 구현
-                if min_cost > cost: # min_cost update하고 해당 경로 저장
+                if min_cost > cost:     # min_cost update하고 해당 경로 저장
                     min_cost = cost
                     min_path = pick.copy()
-                picked[depth] = 0 # 다시 0으로 만들어주기
+                picked[depth] = 0       # 다시 0으로 만들어주기
         return min_cost, min_path
