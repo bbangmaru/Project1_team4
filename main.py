@@ -68,10 +68,12 @@ def main(option, k, s, g, c):
     elif option == 2:
         print("================================")
         print("=          Genetic TSP         =")
+        print("=        sol : " + str(s) + "              =")
+        print("=        gen : " + str(g) + "            =")
         if c == 'pmx':
-            print("=         PMX                  =")
+            print("=          c : PMX             =")
         elif c == 'order':
-            print("=         Order                =")
+            print("=          c : Order           =")
         print("================================")
 
         start = time.time()
@@ -85,10 +87,13 @@ def main(option, k, s, g, c):
     elif option == 3:
         print("================================")
         print("= Genetic TSP with Tree Search =")
+        print("=          k : " + str(k) + "              =")
+        print("=        sol : " + str(s) + "              =")
+        print("=        gen : " + str(g) + "            =")
         if c == 'pmx':
-            print("=         PMX                  =")
+            print("=          c : PMX             =")
         elif c == 'order':
-            print("=         Order                =")
+            print("=          c : Order           =")
         print("================================")
 
         start = time.time()
