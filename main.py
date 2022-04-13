@@ -3,12 +3,13 @@ import os
 import pandas as pd
 import click
 import time
+import math
 
 from CompleteRandomSearch import CRS # 완전 무작위 탐색
 from CalculationDist import Calculation # 계산 담당
 import geneticTSP
 import geneticPlusTSP
-
+import matplotlib.pyplot as plt
 
 def finalManipulate(final_path):
     # reordering solution sequence, 해답 sequence를 재배치
@@ -84,6 +85,27 @@ def main(option, k, s, g, c):
         end = time.time()
         print("execution time : " + str(end - start))
 
+        # 경로 시각화
+        final_coord = [0 for _ in range(1001)]
+        for i in range(len(sol_idx)):
+            final_coord[i] = cities[sol_idx[i]]
+        
+        x = [0 for _ in range(1001)]
+        y = [0 for _ in range(1001)]
+
+        for i in range(1001):
+            x[i] = (float)(final_coord[i][0])
+            y[i] = (float)(final_coord[i][1])
+            x[i] = round(x[i], 4)
+            y[i] = round(y[i], 4)
+        
+        plt.figure(figsize=(100, 100))
+        #plt.scatter(x, y, c='green')
+        plt.scatter(x[0], y[0], s=200, c='blue') #시작점
+        plt.plot(x, y, color='orange', marker='d', alpha=0.5)
+        plt.show()
+        plt.close()
+
     elif option == 3:
         print("================================")
         print("= Genetic TSP with Tree Search =")
@@ -103,6 +125,27 @@ def main(option, k, s, g, c):
         print("final total : " + str(Calculation.evalTotalcost(final_path, cities)))
         end = time.time()
         print("execution time : " + str(end - start))
+
+        # 경로 시각화
+        final_coord = [0 for _ in range(1001)]
+        for i in range(len(final_path)):
+            final_coord[i] = cities[final_path[i]]
+        
+        x = [0 for _ in range(1001)]
+        y = [0 for _ in range(1001)]
+
+        for i in range(1001):
+            x[i] = (float)(final_coord[i][0])
+            y[i] = (float)(final_coord[i][1])
+            x[i] = round(x[i], 4)
+            y[i] = round(y[i], 4)
+        
+        plt.figure(figsize=(100, 100))
+        plt.scatter(x, y, c='green')
+        plt.scatter(x[0], y[0], s=200, c='blue') #시작점
+        plt.plot(x, y, color='red')
+        plt.show()
+        plt.close()
 
 
 if __name__ == "__main__":
