@@ -62,5 +62,5 @@ python main.py --option=3 --k=10 --s=10 --g=1000
 > But can choose crossover method to use 'order'
 
 ```
-python main.py --option=2 --c='order'
+python main.py --option=2 --c=order
 ```
