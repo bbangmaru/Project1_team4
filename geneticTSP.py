@@ -128,11 +128,18 @@ class geneTSP():
         evolarr = [0 for _ in range(self.sol)]
 
         # sol * gen
-        for _ in range(self.gen):
-            for i in range(self.sol):
-                if self.cross == 'order':
+        if self.cross == 'order':
+            for _ in range(self.gen):
+                for i in range(self.sol):
+                    print(self.cross)
                     self.execute1(i)
-                elif self.cross == 'pmx':
+                evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
+            self.generation += 1
+
+        else:
+            for _ in range(self.gen):
+                for i in range(self.sol):
+                    print(self.cross)
                     self.execute2(i)
                 evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
             self.generation += 1
