@@ -131,7 +131,6 @@ class geneTSP():
         if self.cross == 'order':
             for _ in range(self.gen):
                 for i in range(self.sol):
-                    print(self.cross)
                     self.execute1(i)
                 evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
             self.generation += 1
@@ -139,7 +138,6 @@ class geneTSP():
         else:
             for _ in range(self.gen):
                 for i in range(self.sol):
-                    print(self.cross)
                     self.execute2(i)
                 evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
             self.generation += 1
