@@ -68,6 +68,10 @@ def main(option, k, s, g, c):
     elif option == 2:
         print("================================")
         print("=          Genetic TSP         =")
+        if c == 'pmx':
+            print("=         PMX                  =")
+        elif c == 'order':
+            print("=         Order                =")
         print("================================")
 
         start = time.time()
@@ -81,6 +85,10 @@ def main(option, k, s, g, c):
     elif option == 3:
         print("================================")
         print("= Genetic TSP with Tree Search =")
+        if c == 'pmx':
+            print("=         PMX                  =")
+        elif c == 'order':
+            print("=         Order                =")
         print("================================")
 
         start = time.time()
