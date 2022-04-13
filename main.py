@@ -102,7 +102,7 @@ def main(option, k, s, g, c):
         plt.figure(figsize=(100, 100))
         #plt.scatter(x, y, c='green')
         plt.scatter(x[0], y[0], s=200, c='blue') #시작점
-        plt.plot(x, y, color='orange', marker='d', alpha=0.5)
+        plt.plot(x, y, color='orange', marker='d', alpha=0.7)
         plt.show()
         plt.close()
 
