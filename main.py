@@ -71,9 +71,9 @@ def main(option, k, s, g, c):
         print("=        sol : " + str(s) + "              =")
         print("=        gen : " + str(g) + "            =")
         if c == 'pmx':
-            print("=          c : PMX             =")
+            print("=      cross : PMX             =")
         elif c == 'order':
-            print("=          c : Order           =")
+            print("=      cross : Order           =")
         print("================================")
 
         start = time.time()
@@ -91,9 +91,9 @@ def main(option, k, s, g, c):
         print("=        sol : " + str(s) + "              =")
         print("=        gen : " + str(g) + "            =")
         if c == 'pmx':
-            print("=          c : PMX             =")
+            print("=      cross : PMX             =")
         elif c == 'order':
-            print("=          c : Order           =")
+            print("=      cross : Order           =")
         print("================================")
 
         start = time.time()
