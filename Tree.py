@@ -2,10 +2,9 @@ from CalculationDist import Calculation
 
 
 class TreeSearch:
-    # backtracking DFS?
     @staticmethod
     def DFS(picked, center_city_coord, k, depth): #중앙지점 도시 index, 중앙지점 도시 좌표, 클러스터링 개수, 탐색할 depth
-        if depth == k - 1:
+        if depth == k - 1:# leaf 도달
             return Calculation.evalTotalcost(picked, center_city_coord), picked
         min_cost = 99999999
         min_path = []
