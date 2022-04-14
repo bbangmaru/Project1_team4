@@ -149,7 +149,7 @@ def main(option, k, s, g, c):
 
         # csv 파일로 내보내기 0 ~ 999 ~ 0
         temp = pd.DataFrame(final_path)
-        temp.to_csv('./solution_04' + str(Calculation.evalTotalcost(final_path, cities)) + '.csv', index=False)
+        temp.iloc[:1000].to_csv('./solution_04' + str(Calculation.evalTotalcost(final_path, cities)) + '.csv', index=False, header=False)
 
 
 
