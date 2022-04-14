@@ -132,15 +132,15 @@ class geneTSP():
             for _ in range(self.gen):
                 for i in range(self.sol):
                     self.execute1(i)
-                evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
-            self.generation += 1
+                    evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
+                self.generation += 1
 
-        else:
+        elif self.cross == 'pmx':
             for _ in range(self.gen):
                 for i in range(self.sol):
                     self.execute2(i)
-                evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
-            self.generation += 1
+                    evolarr[i] = round(Calculation.evalTotalcost(self.elite_cities_idx[i], self.cities), 1)
+                self.generation += 1
 
         return self.elite_cities_idx[evolarr.index(min(evolarr))], min(evolarr)
 

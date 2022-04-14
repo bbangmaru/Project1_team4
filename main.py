@@ -147,9 +147,11 @@ def main(option, k, s, g, c):
         plt.show()
         plt.close()
 
-        #csv 파일로 내보내기 0 ~ 999 ~ 0
+        # csv 파일로 내보내기 0 ~ 999 ~ 0
         temp = pd.DataFrame(final_path)
-        temp.to_csv('./solution_04.csv', index=False)
+        temp.to_csv('./solution_04' + str(Calculation.evalTotalcost(final_path, cities)) + '.csv', index=False)
+
+
 
 if __name__ == "__main__":
     main()  # pylint: disable=no-value-for-parameter
