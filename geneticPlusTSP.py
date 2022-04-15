@@ -25,7 +25,7 @@ class geneplusTSP():
     def execute(self):
         # Clustering 시작
         kcluster = Clustering()
-        center_city_coord, child_city_idx = kcluster.clusterTSP(self.df, self.k, self.cities)
+        center_city_coord, child_city_idx = kcluster.clusterTSP(self.df, self.k)
 
         rets = []
         sol_path = []

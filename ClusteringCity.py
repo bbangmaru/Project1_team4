@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 class Clustering:
 
     @staticmethod
-    def clusterTSP(df, k, cities):# k는 군집의 수를 의미
+    def clusterTSP(df, k):# k는 군집의 수를 의미
         sub = KMeans(n_clusters = k) # k개의 집단으로 분할
         sub.fit(df) # fit 시키기 - clustering 진행
         labels = sub.predict(df) # 시각화시 필요
