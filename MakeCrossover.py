@@ -25,7 +25,7 @@ class Crossover:
         length = len(cities_idx1)
         start_idx = random.randint(0, length - 1)
         end_idx = random.randint(start_idx + 1, length)
-        ret = np.concatenate((cities_idx2[:start_idx], cities_idx1[start_idx:end_idx], cities_idx2[end_idx:]), axis=0).astype(np.int32).tolist()
+        ret = cities_idx2[:start_idx] + cities_idx1[start_idx:end_idx] + cities_idx2[end_idx:]
         
         flag = False
         while flag == False:
