@@ -28,15 +28,3 @@ class Select:
 
             if idx[0] != idx[1]:
                 return idx
-
-
-    # 토너먼트 선택
-    @staticmethod
-    def tournament(fitness):
-        t = 0.7 # 기준
-        point = random.random()
-        select = False          # False = 나쁜 것
-        if point < t:
-            select = True       #T rue = 좋은 것
-        gene_idx = np.random.choice(np.arange(len(fitness)), size=2, replace=False)
-        return select, gene_idx
